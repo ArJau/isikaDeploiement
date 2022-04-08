@@ -48,6 +48,7 @@ pipeline {
                 echo 'Clean docker image and container'
                 sh 'ssh -v -o StrictHostKeyChecking=no vagrant@192.168.33.11 sudo docker stop demo-isika || true'
                 sh 'ssh -v -o StrictHostKeyChecking=no vagrant@192.168.33.11 sudo docker rm demo-isika || true'
+                sh 'ssh -v -o StrictHostKeyChecking=no vagrant@192.168.33.11 sudo docker rmi jaujau31/demo-isika || true'
                 sh 'docker rmi demo-isika || true'
             }
             
@@ -96,6 +97,7 @@ pipeline {
                 sh 'echo "Deploy into Prod"'
                 sh 'ssh -v -o StrictHostKeyChecking=no ubuntu@35.180.117.10 sudo docker stop demo-isika || true'
                 sh 'ssh -v -o StrictHostKeyChecking=no ubuntu@35.180.117.10 sudo docker rm demo-isika || true'
+                sh 'ssh -v -o StrictHostKeyChecking=no ubuntu@35.180.117.10 sudo docker rmi jaujau31/demo-isika || true'
                 sh 'ssh -v -o StrictHostKeyChecking=no ubuntu@35.180.117.10 sudo docker run -d --name demo-isika -p8080:8080 jaujau31/demo-isika'   
             
 
